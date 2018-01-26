@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Tüm Toplantılar";
+}
+
+<h2>Tüm Toplantılar</h2>
+
+<input type="button" id="toplantilariListele" value="Toplantıları Listele" />
+<div id="toplantilar"></div>
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#toplantilariListele').click(function () {
+            $.getJSON('../api/toplanti').done(function (veri) {
+                var toplantilar = "";
+                $.each(veri, function (key, toplanti) {
+                    toplantilar += toplanti.ToplantiKonusu + toplanti.Tarih + toplanti.BaslangicSaati + toplanti.BitisSaati + toplanti.Katilimcilar + "<br/>";
+                });
+                $('#toplantilar').html(toplantilar);
+            })
+        });
+    })
+</script>
+
